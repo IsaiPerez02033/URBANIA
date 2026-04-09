@@ -1,5 +1,5 @@
 import { useStore } from '../../store/useStore'
-import { getReporte } from '../../services/api'
+import { getReporte, getReportePDF } from '../../services/api'
 import { useState } from 'react'
 
 const SSU_COLOR = (ssu) => {
@@ -21,9 +21,10 @@ export default function ResultsPanel() {
   const clienteFoco = useStore(s => s.clienteFoco)
   const [reporte, setReporte] = useState(null)
   const [loadingReporte, setLoadingReporte] = useState(false)
+  const [loadingPDF, setLoadingPDF] = useState(false)
 
   const zona = zonaSeleccionada
-    ? zonas.find(z => z.zona_id === zonaSeleccionada.id) || null
+    ? zonas.find(z => z.zona_id === (zonaSeleccionada.id || zonaSeleccionada.zona_id)) || zonaSeleccionada
     : null
 
   const handleReporte = async () => {
@@ -36,6 +37,19 @@ export default function ResultsPanel() {
       console.error(e)
     } finally {
       setLoadingReporte(false)
+    }
+  }
+
+  const handleExportPDF = async () => {
+    if (!zona) return
+    setLoadingPDF(true)
+    try {
+      await getReportePDF(zona.zona_id, clienteFoco)
+    } catch (e) {
+      console.error('Error exportando PDF:', e)
+      alert('Error al generar el PDF. Verifica que el backend esté corriendo.')
+    } finally {
+      setLoadingPDF(false)
     }
   }
 
@@ -151,6 +165,63 @@ export default function ResultsPanel() {
               ⚠ {reporte.reporte.alerta}
             </div>
           )}
+
+          {/* ── Botón Exportar PDF ────────────────────────────────────── */}
+          <button
+            onClick={handleExportPDF}
+            disabled={loadingPDF}
+            id="btn-export-pdf"
+            style={{
+              width: '100%',
+              marginTop: 12,
+              padding: '10px 14px',
+              borderRadius: 8,
+              border: 'none',
+              background: loadingPDF
+                ? 'linear-gradient(135deg, #2a2d3a, #1f2230)'
+                : 'linear-gradient(135deg, #1D9E75, #158a65)',
+              color: loadingPDF ? '#8b91a8' : '#fff',
+              cursor: loadingPDF ? 'not-allowed' : 'pointer',
+              fontSize: 12,
+              fontWeight: 700,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+              transition: 'all 0.2s ease',
+              boxShadow: loadingPDF ? 'none' : '0 2px 8px rgba(29,158,117,0.3)',
+            }}
+            onMouseEnter={e => {
+              if (!loadingPDF) {
+                e.target.style.background = 'linear-gradient(135deg, #22b887, #1D9E75)'
+                e.target.style.boxShadow = '0 4px 12px rgba(29,158,117,0.45)'
+                e.target.style.transform = 'translateY(-1px)'
+              }
+            }}
+            onMouseLeave={e => {
+              if (!loadingPDF) {
+                e.target.style.background = 'linear-gradient(135deg, #1D9E75, #158a65)'
+                e.target.style.boxShadow = '0 2px 8px rgba(29,158,117,0.3)'
+                e.target.style.transform = 'translateY(0)'
+              }
+            }}
+          >
+            {loadingPDF ? (
+              <>
+                <LoadingSpinner />
+                Generando PDF...
+              </>
+            ) : (
+              <>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Exportar PDF Ejecutivo
+              </>
+            )}
+          </button>
         </div>
       )}
     </div>
@@ -185,5 +256,17 @@ function MiniStat({ icon, value, label, color }) {
       <div style={{ fontSize: 16, fontWeight: 800, color, lineHeight: 1.2 }}>{value}</div>
       <div style={{ fontSize: 9, color: '#4a5068' }}>{label}</div>
     </div>
+  )
+}
+
+function LoadingSpinner() {
+  return (
+    <div style={{
+      width: 14, height: 14, borderRadius: '50%',
+      border: '2px solid rgba(255,255,255,0.2)',
+      borderTopColor: '#fff',
+      animation: 'spin 0.7s linear infinite',
+      flexShrink: 0,
+    }} />
   )
 }

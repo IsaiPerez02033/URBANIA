@@ -6,15 +6,17 @@ GET  /api/v1/seguridad/zonas/{id}                → zona completa CON Granite
 GET  /api/v1/seguridad/zonas/{id}/geojson        → activos de campo GeoJSON
 GET  /api/v1/seguridad/mapa/geojson-completo     → mapa principal
 GET  /api/v1/seguridad/reporte/{id}/{cliente}    → reporte cliente CON Granite
+GET  /api/v1/seguridad/reporte/{id}/{cliente}/pdf → PDF ejecutivo por cliente
 GET  /api/v1/seguridad/stats/resumen             → estadísticas globales
 POST /api/v1/seguridad/campo/luminaria           → captura de campo (app móvil)
 POST /api/v1/seguridad/campo/terreno-abandonado
 POST /api/v1/seguridad/campo/punto-ciego
 POST /api/v1/seguridad/campo/observacion-calle
 """
-import uuid, logging, math
+import uuid, logging, math, os, tempfile
 from typing import Optional
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
 from db.schema import get_connection
@@ -242,6 +244,66 @@ def reporte_por_cliente(zona_id: str, cliente: str):
         "fecha_auditoria": zona_data["fecha_auditoria"],
     }
 
+
+@router.get("/reporte/{zona_id}/{cliente}/pdf", summary="PDF ejecutivo por cliente")
+def reporte_pdf(zona_id: str, cliente: str):
+    """
+    Genera y descarga un PDF ejecutivo con todos los datos del reporte.
+    Incluye: zona, SSU, breakdown, narrativa IA, recomendaciones por cliente,
+    activos de campo verificados y alertas.
+    """
+    clientes_validos = {"constructora", "videovigilancia", "inmobiliaria"}
+    if cliente not in clientes_validos:
+        raise HTTPException(status_code=400, detail=f"Cliente debe ser: {clientes_validos}")
+    try:
+        zona_data = calcular_ssu_zona(zona_id, usar_watsonx=True)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+    key_map = {
+        "constructora":    "constructora_gobierno",
+        "videovigilancia": "empresa_videovigilancia",
+        "inmobiliaria":    "desarrolladora_inmobiliaria",
+    }
+    rec = zona_data["recomendaciones"][key_map[cliente]]
+
+    reporte_data = {
+        "zona": zona_data["nombre"],
+        "ssu": zona_data["ssu"],
+        "clasificacion": zona_data["clasificacion_label"],
+        "narrativa_zona_ia": zona_data.get("narrativa_ia", ""),
+        "watsonx_usado": zona_data.get("watsonx_usado", False),
+        "cliente": cliente,
+        "reporte": rec,
+        "breakdown": zona_data["breakdown"],
+        "fuente": zona_data["fuente_datos"],
+        "fecha_auditoria": zona_data["fecha_auditoria"],
+    }
+
+    from utils.pdf_generator import URBANIAReportGenerator
+    generator = URBANIAReportGenerator()
+
+    # Crear archivo temporal para el PDF
+    tmp_dir = os.path.join(tempfile.gettempdir(), "urbania_pdfs")
+    os.makedirs(tmp_dir, exist_ok=True)
+
+    safe_zona = zona_data["nombre"].replace(" ", "_").replace("/", "-")[:30]
+    filename = f"URBANIA_{cliente}_{safe_zona}.pdf"
+    output_path = os.path.join(tmp_dir, filename)
+
+    try:
+        result_path = generator.generate_reporte_cliente(reporte_data, output_path)
+        return FileResponse(
+            path=result_path,
+            filename=filename,
+            media_type="application/pdf",
+            headers={
+                "Content-Disposition": f'attachment; filename="{filename}"',
+            },
+        )
+    except Exception as e:
+        logger.error("Error generando PDF: %s", e)
+        raise HTTPException(status_code=500, detail=f"Error al generar PDF: {str(e)}")
 
 @router.get("/stats/resumen", summary="Estadísticas globales de la BD de campo")
 def stats_resumen():
