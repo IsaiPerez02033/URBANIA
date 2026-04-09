@@ -1,24 +1,32 @@
+// Importamos useMemo para calcular los datos del chart solo cuando cambian los resultados
 import { useMemo } from 'react'
+// Importamos los componentes de Recharts para construir la gráfica de barras
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   Cell, ReferenceLine, Legend,
 } from 'recharts'
+// Importamos el store global para leer los resultados del análisis territorial
 import { useStore } from '../../store/useStore'
 
+// Declaramos los colores de cada tipo de score en la gráfica de comparación
 const COLORS = {
-  demand: '#185FA5',
-  risk: '#E24B4A',
-  viability: '#1D9E75',
+  demand: '#185FA5',    // Azul corporativo para el score de demanda
+  risk: '#E24B4A',      // Rojo para el score de riesgo
+  viability: '#1D9E75', // Verde para el score de viabilidad (resultado combinado)
 }
 
+// Declaramos el componente de tooltip personalizado que muestra los valores al hacer hover
 const CustomTooltip = ({ active, payload, label }) => {
+  // Solo renderizamos el tooltip si está activo y tiene datos para mostrar
   if (!active || !payload?.length) return null
   return (
     <div style={{
       background: '#1a1d27', border: '1px solid rgba(255,255,255,0.1)',
       borderRadius: 8, padding: '8px 12px', fontSize: 12,
     }}>
+      {/* Mostramos el nombre de la zona como título del tooltip */}
       <div style={{ fontWeight: 700, color: '#e8eaf0', marginBottom: 4 }}>{label}</div>
+      {/* Iteramos sobre cada serie de datos para mostrar su valor con el color correspondiente */}
       {payload.map((p, i) => (
         <div key={i} style={{ color: p.color }}>
           {p.name}: <b>{Number(p.value).toFixed(0)}</b>
@@ -28,40 +36,51 @@ const CustomTooltip = ({ active, payload, label }) => {
   )
 }
 
+// Declaramos el componente ScoreChart que muestra el ranking comparativo de zonas
 export default function ScoreChart() {
+  // Leemos los resultados del análisis territorial del store
   const analysisResult = useStore(s => s.analysisResult)
 
+  // Calculamos los datos del chart combinando demanda, riesgo y viabilidad por zona
   const data = useMemo(() => {
     if (!analysisResult) return []
 
+    // Indexamos los scores de demanda por ID de zona para acceso eficiente
     const demandMap = {}
     ;(analysisResult.demand_geojson?.features ?? []).forEach(f => {
       const p = f.properties ?? {}
       demandMap[p.id || f.id] = { nombre: p.nombre, demand: p.score_demanda }
     })
 
+    // Indexamos los scores de riesgo por ID de zona
     const riskMap = {}
     ;(analysisResult.risk_geojson?.features ?? []).forEach(f => {
       const p = f.properties ?? {}
       riskMap[p.id || f.id] = p.score_riesgo
     })
 
+    // Indexamos los scores de viabilidad por ID de zona
     const viabilityMap = {}
     ;(analysisResult.viability_scores ?? []).forEach(v => {
       viabilityMap[v.id] = v.score_viabilidad
     })
 
+    // Construimos el array de datos del chart combinando los tres scores por zona
     return Object.entries(demandMap)
       .map(([id, { nombre, demand }]) => ({
         id,
+        // Truncamos el nombre si es muy largo para que no desborde en el eje X
         nombre: nombre?.length > 14 ? nombre.slice(0, 13) + '…' : nombre,
         demand: demand != null ? Math.round(demand) : null,
         risk: riskMap[id] != null ? Math.round(riskMap[id]) : null,
         viability: viabilityMap[id] != null ? Math.round(viabilityMap[id]) : null,
       }))
+      // Filtramos zonas que no tienen score de demanda para evitar barras vacías
       .filter(d => d.demand != null)
+      // Ordenamos de mayor a menor viabilidad para el ranking visual
       .sort((a, b) => (b.viability ?? 0) - (a.viability ?? 0))
-      .slice(0, 20) // top 20 para que el chart no sea ilegible
+      // Limitamos a las 20 mejores zonas para mantener la legibilidad de la gráfica
+      .slice(0, 20)
   }, [analysisResult])
 
   if (!analysisResult || data.length === 0) return null

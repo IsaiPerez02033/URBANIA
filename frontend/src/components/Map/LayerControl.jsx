@@ -1,14 +1,19 @@
+// Importamos el store global para leer y actualizar la capa activa del mapa
 import { useStore } from '../../store/useStore'
 
+// Declaramos la lista de capas disponibles con sus colores y descripciones para el control
 const CAPAS = [
-  { key: 'ssu',            label: 'SSU Total',       color: '#185FA5', desc: 'Score Seguridad Urbana' },
-  { key: 'iluminacion',    label: 'Iluminación',     color: '#EF9F27', desc: 'Luminarias de campo' },
-  { key: 'cobertura',      label: 'Cámaras',         color: '#E24B4A', desc: 'Puntos ciegos' },
-  { key: 'infraestructura',label: 'Infraestructura', color: '#1D9E75', desc: 'Terrenos y vialidad' },
+  { key: 'ssu',             label: 'SSU Total',       color: '#185FA5', desc: 'Score Seguridad Urbana' },
+  { key: 'iluminacion',     label: 'Iluminación',     color: '#EF9F27', desc: 'Luminarias de campo' },
+  { key: 'cobertura',       label: 'Cámaras',         color: '#E24B4A', desc: 'Puntos ciegos' },
+  { key: 'infraestructura', label: 'Infraestructura', color: '#1D9E75', desc: 'Terrenos y vialidad' },
 ]
 
+// Declaramos el componente LayerControl que flota sobre el mapa para cambiar la capa visible
 export default function LayerControl() {
+  // Leemos la capa actualmente seleccionada para resaltar su botón correspondiente
   const capaActiva = useStore(s => s.capaActiva)
+  // Obtenemos la acción para cambiar la capa activa en el store global
   const setCapaActiva = useStore(s => s.setCapaActiva)
 
   return (

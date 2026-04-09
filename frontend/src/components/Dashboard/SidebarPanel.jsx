@@ -1,24 +1,34 @@
+// Importamos el store global para leer y actualizar el estado de la aplicación
 import { useStore } from '../../store/useStore'
 
+// Declaramos la lista de tipos de cliente disponibles para cambiar la perspectiva del reporte
 const CLIENTES = [
   { key: 'videovigilancia', label: 'Videovigilancia', icon: '📷', desc: 'Instaladoras de cámaras' },
   { key: 'constructora',    label: 'Constructora',    icon: '🏗️', desc: 'Licitación de obra pública' },
   { key: 'inmobiliaria',    label: 'Inmobiliaria',    icon: '🏢', desc: 'Desarrolladoras de proyectos' },
 ]
 
+// Retornamos el color correspondiente al SSU usando los mismos umbrales del backend
 const SSU_COLOR = (ssu) => {
-  if (ssu >= 75) return '#1D9E75'
-  if (ssu >= 50) return '#EF9F27'
-  if (ssu >= 30) return '#E24B4A'
-  return '#7B1C1C'
+  if (ssu >= 75) return '#1D9E75'  // Seguridad optima
+  if (ssu >= 50) return '#EF9F27'  // Seguridad aceptable
+  if (ssu >= 30) return '#E24B4A'  // Seguridad deficiente
+  return '#7B1C1C'                 // Zona critica
 }
 
+// Declaramos el componente SidebarPanel que muestra estadísticas, selector de cliente y ranking
 export default function SidebarPanel() {
+  // Leemos las estadísticas globales para los contadores de activos de campo
   const stats = useStore(s => s.stats)
+  // Leemos la lista de zonas para construir el ranking ordenado por SSU
   const zonas = useStore(s => s.zonas)
+  // Leemos el cliente actualmente seleccionado para destacar su botón
   const clienteFoco = useStore(s => s.clienteFoco)
+  // Obtenemos la acción para cambiar el tipo de cliente activo
   const setClienteFoco = useStore(s => s.setClienteFoco)
+  // Obtenemos la acción para seleccionar una zona al hacer clic en el ranking
   const setZonaSeleccionada = useStore(s => s.setZonaSeleccionada)
+  // Leemos la zona seleccionada para resaltarla visualmente en el ranking
   const zonaSeleccionada = useStore(s => s.zonaSeleccionada)
 
   return (

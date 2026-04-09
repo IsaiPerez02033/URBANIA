@@ -1,36 +1,50 @@
+// Importamos el store global para leer el estado de zona seleccionada y cliente activo
 import { useStore } from '../../store/useStore'
+// Importamos las funciones de la API para obtener el reporte y exportar el PDF ejecutivo
 import { getReporte, getReportePDF } from '../../services/api'
+// Importamos useState para manejar el estado local del reporte cargado y los indicadores de carga
 import { useState } from 'react'
 
+// Retornamos el color del SSU usando los mismos umbrales definidos en el backend
 const SSU_COLOR = (ssu) => {
-  if (ssu >= 75) return '#1D9E75'
-  if (ssu >= 50) return '#EF9F27'
-  if (ssu >= 30) return '#E24B4A'
-  return '#7B1C1C'
+  if (ssu >= 75) return '#1D9E75'  // Seguridad optima
+  if (ssu >= 50) return '#EF9F27'  // Seguridad aceptable
+  if (ssu >= 30) return '#E24B4A'  // Seguridad deficiente
+  return '#7B1C1C'                 // Zona critica
 }
 
+// Mapeamos la clave del cliente del store a la clave de objeto del backend
 const CLIENTE_KEY = {
   videovigilancia: 'empresa_videovigilancia',
   constructora: 'constructora_gobierno',
   inmobiliaria: 'desarrolladora_inmobiliaria',
 }
 
+// Declaramos el componente ResultsPanel que muestra el SSU, breakdown y reporte de la zona seleccionada
 export default function ResultsPanel() {
+  // Leemos la zona seleccionada desde el store (puede venir del mapa o del sidebar)
   const zonaSeleccionada = useStore(s => s.zonaSeleccionada)
+  // Leemos la lista completa de zonas para buscar el objeto completo si solo tenemos el ID
   const zonas = useStore(s => s.zonas)
+  // Leemos el tipo de cliente activo para personalizar el reporte que se solicita
   const clienteFoco = useStore(s => s.clienteFoco)
+  // Declaramos el estado del reporte cargado desde el backend
   const [reporte, setReporte] = useState(null)
+  // Declaramos los indicadores de carga para deshabilitar botones durante las peticiones
   const [loadingReporte, setLoadingReporte] = useState(false)
   const [loadingPDF, setLoadingPDF] = useState(false)
 
+  // Resolvemos el objeto completo de la zona combinando la selección del mapa y la lista de zonas
   const zona = zonaSeleccionada
     ? zonas.find(z => z.zona_id === (zonaSeleccionada.id || zonaSeleccionada.zona_id)) || zonaSeleccionada
     : null
 
+  // Cargamos el reporte ejecutivo del cliente activo para la zona seleccionada
   const handleReporte = async () => {
     if (!zona) return
     setLoadingReporte(true)
     try {
+      // Solicitamos el reporte al backend y lo almacenamos en el estado local
       const data = await getReporte(zona.zona_id, clienteFoco)
       setReporte(data)
     } catch (e) {
@@ -40,10 +54,12 @@ export default function ResultsPanel() {
     }
   }
 
+  // Generamos y descargamos el PDF ejecutivo para la zona y cliente actuales
   const handleExportPDF = async () => {
     if (!zona) return
     setLoadingPDF(true)
     try {
+      // La función de la API maneja la creación del enlace de descarga internamente
       await getReportePDF(zona.zona_id, clienteFoco)
     } catch (e) {
       console.error('Error exportando PDF:', e)
