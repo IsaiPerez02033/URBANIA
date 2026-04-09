@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c-blue: #185FA5;
+  --c-blue-light: #E6F1FB;
+  --c-green: #1D9E75;
+  --c-green-light: #EAF3DE;
+  --c-amber: #EF9F27;
+  --c-amber-light: #FAEEDA;
+  --c-red: #E24B4A;
+  --c-red-light: #FCEBEB;
+  --c-gray-bg: #0f1117;
+  --c-panel: #1a1d27;
+  --c-panel-border: rgba(255,255,255,0.08);
+  --c-text: #e8eaf0;
+  --c-text-muted: #8b91a8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: var(--c-gray-bg);
+  color: var(--c-text);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Leaflet overrides para tema oscuro */
+.leaflet-container {
+  background: #0d1117 !important;
+  font-family: inherit !important;
+}
+.leaflet-popup-content-wrapper {
+  background: var(--c-panel) !important;
+  color: var(--c-text) !important;
+  border: 1px solid var(--c-panel-border) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+}
+.leaflet-popup-tip { background: var(--c-panel) !important; }
+.leaflet-popup-close-button { color: var(--c-text-muted) !important; }
+.leaflet-control-attribution { display: none !important; }
+.leaflet-control-zoom a {
+  background: var(--c-panel) !important;
+  color: var(--c-text) !important;
+  border-color: var(--c-panel-border) !important;
+}
+.leaflet-control-zoom a:hover { background: #252836 !important; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse-ring { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.6); opacity: 0; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.fade-in { animation: fadeIn 0.3s ease forwards; }
+.spinner { animation: spin 0.8s linear infinite; }
+
+/* Layer toggle buttons */
+.layer-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 20px;
+  border: 1px solid var(--c-panel-border);
+  background: var(--c-panel);
+  color: var(--c-text-muted);
+  cursor: pointer; font-size: 12px; font-weight: 500;
+  transition: all 0.2s;
+}
+.layer-btn.active { border-color: currentColor; color: var(--c-text); }
+.layer-btn:hover { background: #252836; }
+
+/* Score badge */
+.score-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 10px;
+  font-size: 15px; font-weight: 700; flex-shrink: 0;
+}
