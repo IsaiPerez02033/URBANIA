@@ -1,4 +1,4 @@
-# URBANIA — Plataforma de Inteligencia Territorial
+# SUSVI — Plataforma de Inteligencia Territorial
 
 > **SaaS B2B** · Motor de análisis territorial con IBM Watsonx AI · Talent Land 2026
 
@@ -25,7 +25,7 @@ npm run dev                      # → http://localhost:5173
 ## Estructura
 
 ```
-urbania/
+susvi/
 ├── backend/
 │   ├── main.py                 ← FastAPI · 8 endpoints REST
 │   ├── agents/
@@ -66,7 +66,7 @@ SD = Score Demanda · SR = Score Riesgo · FP = factor sectorial · TI = ticket 
 
 ```env
 # backend/.env
-URBANIA_PROD_MODE=1
+SUSVI_PROD_MODE=1
 WATSONX_API_KEY=tu_api_key
 WATSONX_PROJECT_ID=tu_project_id
 WATSONX_URL=https://us-south.ml.cloud.ibm.com
@@ -83,4 +83,4 @@ cd backend && pytest tests/ -v
 
 ---
 
-*URBANIA © 2026 · XOLUM · Talent Land — Track Ciudades Resilientes*
+*SUSVI © 2026 · XOLUM · Talent Land — Track Ciudades Resilientes*

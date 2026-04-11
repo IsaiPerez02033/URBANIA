@@ -1,7 +1,7 @@
 @startuml
 !theme toy
 
-title URBANIA - Diagrama de Despliegue UML
+title SUSVI - Diagrama de Despliegue UML
 
 node "Browser Cliente" as Browser {
     artifact "React App (App.jsx)" as App
@@ -32,8 +32,8 @@ node "IBM Cloud (Nube Pública)" as Cloud {
     }
     
     node "IBM Cloud Functions\n(Alternativa Serverless)" as FaaS {
-        [urbania/analyze Action]
-        [urbania/export Action]
+        [susvi/analyze Action]
+        [susvi/export Action]
     }
 }
 
@@ -44,11 +44,11 @@ Browser --> Backend : "REST API (JSON) via proxy local/produccion"
 Backend --> [Granite 13B Model] : "REST (Watsonx API Key)"
 
 ' Si se usa el modulo Cloud Functions
-[urbania/analyze Action] ..> [Granite 13B Model] : "REST"
+[susvi/analyze Action] ..> [Granite 13B Model] : "REST"
 Browser ..> FaaS : "Alternative API Gateway (CORS)"
 
 note bottom of DevMachine
-  URBANIA puede correr monolítico
+  SUSVI puede correr monolítico
   localmente (uvicorn) o ser
   orquestado hacia IBM Cloud Functions.
 end note

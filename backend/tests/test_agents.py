@@ -1,5 +1,5 @@
 """
-URBANIA — Test Suite Completa
+SUSVI — Test Suite Completa
 ==============================
 Corre con:  cd backend && pytest tests/ -v
 Cubre:
@@ -39,7 +39,7 @@ from agents.risk_agent import RiskAgent, _compute_risk_score, _risk_tier
 from agents.business_agent import BusinessAgent, _score_viabilidad, _ti_norm, _categoria_viabilidad
 # Importamos el agente de negocio y sus fórmulas financieras para asegurar la precisión del ROI y la viabilidad.
 
-from utils.pdf_generator import URBANIAReportGenerator
+from utils.pdf_generator import SUSVIReportGenerator
 # Importamos el generador de reportes para comprobar la exportación de resultados a PDF.
 
 FIXTURE_PATH = os.path.join(os.path.dirname(__file__), "../data/mock_fixture.json")
@@ -564,7 +564,7 @@ class TestPDFGenerator:
         }
         pdf_dict["analysis_id"] = "test-abc12345"
 
-        gen = URBANIAReportGenerator()
+        gen = SUSVIReportGenerator()
         out_path = str(tmp_path / "test_report.pdf")
         result = gen.generate(pdf_dict, out_path)
         assert os.path.exists(result)

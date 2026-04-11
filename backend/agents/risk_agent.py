@@ -1,5 +1,5 @@
 """
-URBANIA — Agente de Riesgo Operativo
+SUSVI — Agente de Riesgo Operativo
 ======================================
 Calcula el Score de Riesgo (0–100) por manzana.
 Integra: incidencia SNSP, déficit de iluminación y accesibilidad logística.
@@ -11,7 +11,7 @@ import logging
 import copy
 
 # Creamos el logger específico para el agente de riesgo
-logger = logging.getLogger("urbania.risk_agent")
+logger = logging.getLogger("susvi.risk_agent")
 
 # Declaramos los pesos del índice de riesgo (deben sumar 1.0)
 # La incidencia delictiva tiene mayor peso por su impacto directo en seguridad patrimonial
@@ -160,7 +160,7 @@ def _razon_descarte(feature: dict, score: float, tier: str) -> str:
         f"{nombre}: Score de riesgo {score:.0f}/100 supera umbral de descarte (>60). "
         f"{snsp} eventos SNSP registrados (predominio: {tipo.replace('_', ' ')}). "
         f"Inversión en esta zona presenta probabilidad alta de pérdida patrimonial. "
-        f"URBANIA recomienda explícitamente NO desplegar activos aquí."
+        f"SUSVI recomienda explícitamente NO desplegar activos aquí."
     )
 
 

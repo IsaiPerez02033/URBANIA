@@ -1,5 +1,5 @@
 """
-URBANIA — Módulo de Ingesta de Datos (M1)
+SUSVI — Módulo de Ingesta de Datos (M1)
 ==========================================
 Carga el fixture GeoJSON y normaliza features a formato estándar.
 En modo producción activa pipelines reales (DENUE, SNSP, VIIRS, OSM).
@@ -8,9 +8,9 @@ import json
 import os
 import logging
 
-logger = logging.getLogger("urbania.ingest")
+logger = logging.getLogger("susvi.ingest")
 
-PROD_MODE_VAR = "URBANIA_PROD_MODE"
+PROD_MODE_VAR = "SUSVI_PROD_MODE"
 
 
 def flag_production_sources() -> bool:

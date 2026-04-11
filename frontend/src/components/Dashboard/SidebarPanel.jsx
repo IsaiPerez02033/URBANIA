@@ -38,7 +38,7 @@ export default function SidebarPanel() {
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <div style={{ width: 34, height: 34, borderRadius: 8, background: '#185FA5', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, flexShrink: 0 }}>🔐</div>
         <div>
-          <div style={{ fontSize: 15, fontWeight: 800, color: '#e8eaf0', letterSpacing: '-0.01em' }}>URBANIA</div>
+          <div style={{ fontSize: 15, fontWeight: 800, color: '#e8eaf0', letterSpacing: '-0.01em' }}>SUSVI</div>
           <div style={{ fontSize: 10, color: '#8b91a8', letterSpacing: '0.07em' }}>SEGURIDAD URBANA</div>
         </div>
       </div>

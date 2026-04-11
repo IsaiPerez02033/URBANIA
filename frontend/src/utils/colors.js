@@ -1,4 +1,4 @@
-// Declaramos la paleta de colores corporativa de URBANIA usada en todo el sistema
+// Declaramos la paleta de colores corporativa de SUSVI usada en todo el sistema
 export const COLORS = {
   green: '#1D9E75',       // Verde para zonas con score alto o viabilidad alta
   greenLight: '#EAF3DE',  // Verde claro para fondos y tarjetas de score positivo
@@ -19,7 +19,7 @@ export const scoreColor = (score, inverse = false) => {
   return COLORS.red
 }
 
-// Retornamos el color de texto para una clasificación cualitativa del sistema URBANIA
+// Retornamos el color de texto para una clasificación cualitativa del sistema SUSVI
 export const classColor = (clasificacion) => {
   // Mapeamos todos los tipos de clasificación usados en el sistema a su color correspondiente
   const map = {

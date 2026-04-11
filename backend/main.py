@@ -1,5 +1,5 @@
 """
-URBANIA SEGURIDAD — API REST v2.0
+SUSVI SEGURIDAD — API REST v2.0
 ===================================
 IBM Watsonx AI (Granite 3-8B) + Base de datos propia de campo XOLUM
 """
@@ -27,11 +27,11 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 )
 # Creamos el logger específico para el módulo principal de la API
-logger = logging.getLogger("urbania.api")
+logger = logging.getLogger("susvi.api")
 
 # Inicializamos la aplicación FastAPI con su título, descripción y versión
 app = FastAPI(
-    title="URBANIA Seguridad",
+    title="SUSVI Seguridad",
     description=(
         "Inteligencia de Seguridad Urbana B2B — IBM Watsonx AI (Granite 3-8B) + "
         "datos propios verificados en campo. Sector piloto: CDMX."
@@ -82,7 +82,7 @@ async def startup():
         # Si no hay credenciales válidas, operamos en modo fallback algorítmico
         logger.warning("Watsonx no disponible — modo fallback algorítmico")
 
-    logger.info("URBANIA Seguridad lista.")
+    logger.info("SUSVI Seguridad lista.")
 
 # Registramos el router de seguridad en la aplicación principal
 app.include_router(security_router)

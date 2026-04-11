@@ -90,7 +90,7 @@ export default function AnalysisPanel({ onResult }) {
             fontSize: 16,
           }}>🏙️</div>
           <div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#e8eaf0' }}>URBANIA</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#e8eaf0' }}>SUSVI</div>
             <div style={{ fontSize: 10, color: '#8b91a8', letterSpacing: '0.08em' }}>INTELIGENCIA TERRITORIAL</div>
           </div>
         </div>

@@ -1,8 +1,8 @@
 """
-URBANIA — Generador de PDF Ejecutivo (ReportLab)
+SUSVI — Generador de PDF Ejecutivo (ReportLab)
 =================================================
 Genera el reporte PDF listo para presentar a comités de inversión.
-Paleta corporativa URBANIA: azul #185FA5, verde #1D9E75, rojo #E24B4A.
+Paleta corporativa SUSVI: azul #185FA5, verde #1D9E75, rojo #E24B4A.
 """
 # Importamos os para manejo de rutas y datetime para la marca de tiempo del documento
 import os
@@ -26,7 +26,7 @@ except ImportError:
 
 
 # ── Paleta corporativa ────────────────────────────────────────────────────────
-# Declaramos los colores corporativos de URBANIA como constantes de ReportLab
+# Declaramos los colores corporativos de SUSVI como constantes de ReportLab
 if REPORTLAB_AVAILABLE:
     C_BLUE = colors.HexColor("#185FA5")        # Azul corporativo principal
     C_BLUE_LIGHT = colors.HexColor("#E8F0FC")  # Azul claro para fondos de sección
@@ -157,9 +157,9 @@ def _ssu_bg_color(ssu):
     return C_RED_LIGHT         # Fondo rojo claro también para zonas críticas
 
 
-# Declaramos la clase generadora de reportes PDF ejecutivos para la plataforma URBANIA
-class URBANIAReportGenerator:
-    """Generador de reportes PDF ejecutivos para URBANIA."""
+# Declaramos la clase generadora de reportes PDF ejecutivos para la plataforma SUSVI
+class SUSVIReportGenerator:
+    """Generador de reportes PDF ejecutivos para SUSVI."""
 
     # Generamos el reporte ejecutivo genérico para análisis de inversión territorial
     def generate(self, data: dict, output_path: str) -> str:
@@ -167,7 +167,7 @@ class URBANIAReportGenerator:
         if not REPORTLAB_AVAILABLE:
             # Escribimos un archivo de texto plano como fallback si ReportLab no está instalado
             with open(output_path.replace(".pdf", ".txt"), "w", encoding="utf-8") as f:
-                f.write("URBANIA — Reporte Ejecutivo\n")
+                f.write("SUSVI — Reporte Ejecutivo\n")
                 f.write("=" * 50 + "\n")
                 f.write(data.get("resumen_ejecutivo", "") + "\n")
             return output_path.replace(".pdf", ".txt")
@@ -188,7 +188,7 @@ class URBANIAReportGenerator:
 
         # ── Encabezado ────────────────────────────────────────────────────────
         # Agregamos el título principal y el subtítulo del análisis
-        story.append(Paragraph("URBANIA", styles["title"]))
+        story.append(Paragraph("SUSVI", styles["title"]))
         story.append(Paragraph(
             data.get("titulo", "Reporte de Inteligencia Territorial"),
             styles["subtitle"]
@@ -376,7 +376,7 @@ class URBANIAReportGenerator:
         story.append(HRFlowable(width="100%", thickness=1, color=C_GRAY_MID))
         story.append(Spacer(1, 6))
         story.append(Paragraph(
-            "Documento generado por URBANIA — Plataforma de Inteligencia Territorial · XOLUM © 2026 · "
+            "Documento generado por SUSVI — Plataforma de Inteligencia Territorial · XOLUM © 2026 · "
             "Análisis basado en datos públicos INEGI, SNSP, NASA VIIRS y OpenStreetMap. "
             "Este reporte es de uso interno y no constituye asesoría financiera certificada.",
             styles["small_gray"]
@@ -400,7 +400,7 @@ class URBANIAReportGenerator:
         if not REPORTLAB_AVAILABLE:
             # Escribimos un texto plano con los datos básicos si ReportLab no está disponible
             with open(output_path.replace(".pdf", ".txt"), "w", encoding="utf-8") as f:
-                f.write(f"URBANIA — Reporte {reporte_data.get('cliente', 'N/A')}\n")
+                f.write(f"SUSVI — Reporte {reporte_data.get('cliente', 'N/A')}\n")
                 f.write("=" * 60 + "\n")
                 f.write(f"Zona: {reporte_data.get('zona', '')}\n")
                 f.write(f"SSU: {reporte_data.get('ssu', 0)}\n")
@@ -453,9 +453,9 @@ class URBANIAReportGenerator:
         # PORTADA / ENCABEZADO
         # ═══════════════════════════════════════════════════════════════════════
 
-        # Construimos el banner azul principal con el nombre URBANIA y el tagline
+        # Construimos el banner azul principal con el nombre SUSVI y el tagline
         banner_data = [[
-            Paragraph("URBANIA", ParagraphStyle(
+            Paragraph("SUSVI", ParagraphStyle(
                 "banner_title", fontName="Helvetica-Bold", fontSize=20,
                 textColor=C_WHITE, alignment=TA_LEFT,
             )),
@@ -674,7 +674,7 @@ class URBANIAReportGenerator:
         if narrativa_ia:
             story.append(Paragraph("Análisis de Inteligencia Artificial", styles["section"]))
             # Indicamos si la narrativa fue generada por Granite o por el motor algorítmico
-            ia_label = "IBM Watsonx Granite 3-8B" if watsonx_usado else "Motor Algorítmico URBANIA"
+            ia_label = "IBM Watsonx Granite 3-8B" if watsonx_usado else "Motor Algorítmico SUSVI"
             story.append(Paragraph(
                 f'<font name="Helvetica-Oblique" size="8" color="#888780">Generado por: {ia_label}</font>',
                 styles["body"]
@@ -758,7 +758,7 @@ class URBANIAReportGenerator:
         story.append(HRFlowable(width="100%", thickness=1.5, color=C_BLUE))
         story.append(Spacer(1, 8))
         story.append(Paragraph(
-            "Documento generado por URBANIA — Plataforma de Inteligencia de Seguridad Urbana",
+            "Documento generado por SUSVI — Plataforma de Inteligencia de Seguridad Urbana",
             styles["small_center"]
         ))
         story.append(Paragraph(

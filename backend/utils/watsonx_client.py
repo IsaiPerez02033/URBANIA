@@ -1,5 +1,5 @@
 """
-URBANIA — Cliente IBM Watsonx AI (Granite 3-8B)
+SUSVI — Cliente IBM Watsonx AI (Granite 3-8B)
 =================================================
 Conecta con Granite 3-8B para generar narrativas ejecutivas de seguridad urbana.
 Fallback algorítmico si no hay conexión (modo demo).
@@ -12,7 +12,7 @@ import urllib.request, urllib.parse
 from typing import Optional
 
 # Creamos el logger específico para el cliente de Watsonx
-logger = logging.getLogger("urbania.watsonx")
+logger = logging.getLogger("susvi.watsonx")
 
 # Declaramos los identificadores de los modelos disponibles en IBM Watsonx
 MODEL_GRANITE_3  = "ibm/granite-3-8b-instruct"   # Modelo principal: rápido y eficiente

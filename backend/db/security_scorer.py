@@ -1,5 +1,5 @@
 """
-URBANIA SEGURIDAD — Motor de Scores + Watsonx AI
+SUSVI SEGURIDAD — Motor de Scores + Watsonx AI
 =================================================
 Calcula el SSU y usa IBM Granite 3-8B para generar
 narrativas ejecutivas reales — no textos hardcodeados.
@@ -12,7 +12,7 @@ import logging
 from db.schema import get_connection
 
 # Creamos el logger específico para el motor de cálculo de scores de seguridad
-logger = logging.getLogger("urbania.security_scorer")
+logger = logging.getLogger("susvi.security_scorer")
 
 # Declaramos los pesos de cada componente del SSU — deben sumar 1.0
 PESOS = {

@@ -1,5 +1,5 @@
 """
-URBANIA — Agente de Demanda
+SUSVI — Agente de Demanda
 ============================
 Calcula el Score de Demanda (0–100) por manzana ponderando variables
 demográficas, económicas, de movilidad y de luminosidad nocturna.
@@ -15,7 +15,7 @@ import json
 import copy
 
 # Creamos el logger específico para el agente de demanda
-logger = logging.getLogger("urbania.demand_agent")
+logger = logging.getLogger("susvi.demand_agent")
 
 # Declaramos los pesos de cada variable por sector (cada fila debe sumar 1.0)
 # Los pesos reflejan la importancia relativa de cada indicador según el tipo de negocio

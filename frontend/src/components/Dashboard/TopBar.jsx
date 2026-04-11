@@ -28,10 +28,10 @@ export default function TopBar() {
       display: 'flex', alignItems: 'center',
       padding: '0 16px', gap: 12, zIndex: 100,
     }}>
-      {/* Logotipo de URBANIA con ícono de seguridad y badge de módulo */}
+      {/* Logotipo de SUSVI con ícono de seguridad y badge de módulo */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <div style={{ width: 26, height: 26, borderRadius: 6, background: '#185FA5', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>🔐</div>
-        <span style={{ fontSize: 15, fontWeight: 800, color: '#e8eaf0', letterSpacing: '-0.01em' }}>URBANIA</span>
+        <span style={{ fontSize: 15, fontWeight: 800, color: '#e8eaf0', letterSpacing: '-0.01em' }}>SUSVI</span>
         {/* Badge identificador del módulo de seguridad */}
         <span style={{ fontSize: 10, padding: '1px 6px', borderRadius: 4, background: 'rgba(24,95,165,0.3)', color: '#7ab3f0', fontWeight: 600 }}>SEGURIDAD</span>
       </div>

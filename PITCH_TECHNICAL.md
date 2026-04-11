@@ -5,7 +5,7 @@ Esta guía proporciona el orden exacto del flujo a mostrar en tu demostración d
 ## Flujo de Demo (3 Minutos Exactos)
 
 1. **(0:00 - 0:20) [Apertura & Planteo de Problema]**  
-   Abrir la aplicación web mostrando el **mapa oscuro con las contornos limpios de la CDMX**. _"Bienvenidos a URBANIA. En México, abrir o desarrollar infraestructura territorial a gran escala se decide por instinto, tomando meses de consultoría. Esto cuesta tiempo y millones en zonas inviables. Hoy, lo resolvemos instantáneamente."_
+   Abrir la aplicación web mostrando el **mapa oscuro con las contornos limpios de la CDMX**. _"Bienvenidos a SUSVI. En México, abrir o desarrollar infraestructura territorial a gran escala se decide por instinto, tomando meses de consultoría. Esto cuesta tiempo y millones en zonas inviables. Hoy, lo resolvemos instantáneamente."_
    
 2. **(0:20 - 0:40) [Parametrización IA]**  
    Ir al panel de configuración (Sector Selector), seleccionar el target **"Telecomunicaciones"** y fijar rápidamente algunos parámetros de negocio como el Ticket Inversión y Tasa Descuento.
@@ -21,7 +21,7 @@ Esta guía proporciona el orden exacto del flujo a mostrar en tu demostración d
    Atrae la mirada al panel lateral de la izquierda de **"Escenarios de Despliegue"**. Explica brevemente el escenario *Equilibrado* indicando su **ROI y el Payback**, y detalla cómo esto traduce Big Geo-Data pura en KPI's operacionales y bancarios.
    
 6. **(2:30 - 3:00) [Cierre y Reporte Físico]**  
-   Clica el botón maestro de **"Descargar PDF Ejecutivo"**. Se genera el reporte ReportLab. Abre el PDF frente a la cámara mostrando la tabla con el Zebra Striping y la paleta formal, y cierra con: _"URBANIA reduce 4 meses de due-diligence en Big Data georreferencial a este único PDF gerencial generado en menos de un minuto."_
+   Clica el botón maestro de **"Descargar PDF Ejecutivo"**. Se genera el reporte ReportLab. Abre el PDF frente a la cámara mostrando la tabla con el Zebra Striping y la paleta formal, y cierra con: _"SUSVI reduce 4 meses de due-diligence en Big Data georreferencial a este único PDF gerencial generado en menos de un minuto."_
 
 
 ## QA y Defensas Preparadas Contra Jurados Exigentes 🛡️
@@ -33,13 +33,13 @@ Esta guía proporciona el orden exacto del flujo a mostrar en tu demostración d
 → Separación de responsabilidades y *Hyper-paralelismo asíncrono*, usando funciones nativas Python (`asyncio.gather`). Demanda y Riesgo corren de manera agnóstica al mismo tiempo, recortando por completo la latencia. Cada Agente posee un System Prompt estrictamente delimitado permitiendo generar arquitecturas predecibles y de alta especialidad. Un Big-Agent causaría "desvarios", latencias brutales y generaría tokens mal-formados.
 
 **¿Cómo escalaría esto a datos reales de todo México?**  
-→ La estructura está armada. Con setear la variable booleana `URBANIA_PROD_MODE=true` reactivamos las canalizaciones nativas que creamos en nuestro modulo M1 (Ingesta) con extractores espaciales hacia DENUE, SNSP y la infraestructura VIIRS satelital. Sumado a nuestra arquitectura serverless `Action-Based` desplegable enteramente a **IBM Cloud Functions**, Urbania puede computar infinitas manzanas a la vez, escalando bajo una política estricta _Pay-per-Compute_ transparente y sin servidores durmientes.
+→ La estructura está armada. Con setear la variable booleana `SUSVI_PROD_MODE=true` reactivamos las canalizaciones nativas que creamos en nuestro modulo M1 (Ingesta) con extractores espaciales hacia DENUE, SNSP y la infraestructura VIIRS satelital. Sumado a nuestra arquitectura serverless `Action-Based` desplegable enteramente a **IBM Cloud Functions**, Susvi puede computar infinitas manzanas a la vez, escalando bajo una política estricta _Pay-per-Compute_ transparente y sin servidores durmientes.
 
 **¿Qué tan precisos son sus "scores"?**  
 → Es importante aclarar que son *indicadores relativos macro*, NO predicciones absolutas de machine learning supervisado. Su tracción reside en categorizar y rankear dinámicamente. Sabemos con certidumbre que una zona categorizada en 85pts por acceso logístico e ingresos generará un performance diferencial aplastante en contraste con una de 30pts en entorno equivalente. Además, los pesos algorítmicos son hiper-optimizables basándonos en el performance de los primeros despliegues de un cliente real.
 
 **Si uso Google Maps Platform o ArcGis, ¿Ya hago esto no?**  
-→ No. Google Maps y ESRI proveen visualización, y dejan el cálculo de oportunidad, el descarte matemático y la inferencia puramente en ti. URBANIA fue concebido para ser un **Motor B2B de inteligencia financiera**, es decir, no sólo muestra sino que **dictamina a un comité qué locaciones son INVIABLES (zona descarte)**, precalculando ROI y ahorrando millones en operaciones riesgosas de calle (crimen/delincuencia, accesibilidad y rentabilidad proyectada). Somos un SAAS transaccional analítico.
+→ No. Google Maps y ESRI proveen visualización, y dejan el cálculo de oportunidad, el descarte matemático y la inferencia puramente en ti. SUSVI fue concebido para ser un **Motor B2B de inteligencia financiera**, es decir, no sólo muestra sino que **dictamina a un comité qué locaciones son INVIABLES (zona descarte)**, precalculando ROI y ahorrando millones en operaciones riesgosas de calle (crimen/delincuencia, accesibilidad y rentabilidad proyectada). Somos un SAAS transaccional analítico.
 
 ---
 ### Métricas Impactantes Relevantes:

@@ -1,7 +1,7 @@
 @startuml
 !theme mars
 
-title URBANIA - Diagrama de Componentes (M1-M4)
+title SUSVI - Diagrama de Componentes (M1-M4)
 
 package "Frontend (React + Vite)" {
     [React UI] <<Web App>>

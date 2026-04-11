@@ -1,5 +1,5 @@
 """
-URBANIA — Agente de Negocios
+SUSVI — Agente de Negocios
 =============================
 Combina scores de Demanda y Riesgo con parámetros financieros del cliente.
 Genera el Score de Viabilidad y 3 escenarios con ROI y payback.
@@ -11,7 +11,7 @@ import logging
 import math
 
 # Creamos el logger específico para el agente de negocios
-logger = logging.getLogger("urbania.business_agent")
+logger = logging.getLogger("susvi.business_agent")
 
 # Declaramos los niveles de viabilidad con sus umbrales mínimos y colores para visualización
 VIABILITY_TIERS = {
@@ -216,7 +216,7 @@ def _executive_report(
     escenario_rec = next((s for s in scenarios if s["recomendado"]), scenarios[-1])
 
     reporte = {
-        "titulo": f"Reporte Ejecutivo URBANIA — Sector {sector.capitalize()}",
+        "titulo": f"Reporte Ejecutivo SUSVI — Sector {sector.capitalize()}",
         "resumen_ejecutivo": (
             f"El análisis territorial de {n_total} manzanas en la zona piloto CDMX identifica "
             f"{len(verdes)} zonas de alta viabilidad ({len(verdes)/n_total*100:.0f}%), "
@@ -258,7 +258,7 @@ def _executive_report(
         "proximos_pasos": [
             f"Solicitar visita técnica a las {min(len(verdes), 5)} zonas verdes prioritarias.",
             "Cotizar póliza de seguro para zonas de cautela con integradoras especializadas.",
-            "Activar pipeline de datos reales (URBANIA_PROD_MODE=1) para actualización mensual.",
+            "Activar pipeline de datos reales (SUSVI_PROD_MODE=1) para actualización mensual.",
             "Generar escenario personalizado con tasa de descuento ajustada por sector.",
         ],
     }
@@ -345,7 +345,7 @@ class BusinessAgent:
         report = business_results.get("reporte_ejecutivo", {})
         # Retornamos solo los campos necesarios para construir el documento PDF
         return {
-            "titulo": report.get("titulo", "Reporte Ejecutivo URBANIA"),
+            "titulo": report.get("titulo", "Reporte Ejecutivo SUSVI"),
             "resumen_ejecutivo": report.get("resumen_ejecutivo", ""),
             "hallazgos_clave": report.get("hallazgos_clave", []),
             "top_zonas_inversion": report.get("top_zonas_inversion", []),

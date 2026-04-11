@@ -1,6 +1,6 @@
-# Referencia de API REST — URBANIA
+# Referencia de API REST — SUSVI
 
-> **Nota de Autenticación (Producción)**: El API B2B de URBANIA requiere para endpoints productivos del token de autorización `Bearer <JWT>` que se inyecta en la cabecera `Authorization`. Sin embargo, en entornos Demo/Testing actual, no se requiere auth en los headers.
+> **Nota de Autenticación (Producción)**: El API B2B de SUSVI requiere para endpoints productivos del token de autorización `Bearer <JWT>` que se inyecta en la cabecera `Authorization`. Sin embargo, en entornos Demo/Testing actual, no se requiere auth en los headers.
 
 ---
 

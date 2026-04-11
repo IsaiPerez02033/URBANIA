@@ -1,5 +1,5 @@
 #!/bin/bash
-# URBANIA — Script de arranque para demo hackathon
+# SUSVI — Script de arranque para demo hackathon
 set -e
 
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -8,7 +8,7 @@ FRONTEND_DIR="$PROJECT_ROOT/frontend"
 
 echo ""
 echo "╔══════════════════════════════════════════╗"
-echo "║   URBANIA — Demo Hackathon Talent Land   ║"
+echo "║   SUSVI — Demo Hackathon Talent Land   ║"
 echo "╚══════════════════════════════════════════╝"
 echo ""
 

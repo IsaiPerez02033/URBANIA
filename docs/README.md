@@ -1,6 +1,6 @@
-# Documentación Arquitectónica - URBANIA PlantUML
+# Documentación Arquitectónica - SUSVI PlantUML
 
-Esta carpeta contiene la documentación técnica de la plataforma URBANIA generada bajo el estándar UML a través de [PlantUML](https://plantuml.com/).
+Esta carpeta contiene la documentación técnica de la plataforma SUSVI generada bajo el estándar UML a través de [PlantUML](https://plantuml.com/).
 
 ## 📁 Diagramas Incluidos:
 

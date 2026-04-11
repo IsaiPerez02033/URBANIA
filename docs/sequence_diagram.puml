@@ -1,7 +1,7 @@
 @startuml
 !theme plain
 
-title URBANIA - Diagrama de Secuencia de Inteligencia Territorial
+title SUSVI - Diagrama de Secuencia de Inteligencia Territorial
 
 actor "Analista B2B" as User
 participant "Frontend\n(React)" as UI
@@ -64,7 +64,7 @@ UI -> User: Visualización de Calor e Interfaz C-Suite
 User -> UI: Clic en "Exportar PDF"
 UI -> API: POST /api/v1/export/report (format=pdf)
 activate API
-API -> API: URBANIAReportGenerator\n(ReportLab)
+API -> API: SUSVIReportGenerator\n(ReportLab)
 API --> UI: Blob (application/pdf)
 deactivate API
 UI --> User: Descarga de archivo PDF

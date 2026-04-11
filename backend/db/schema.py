@@ -1,5 +1,5 @@
 """
-URBANIA SEGURIDAD — Esquema de Base de Datos Propia
+SUSVI SEGURIDAD — Esquema de Base de Datos Propia
 =====================================================
 SQLite local para la fase piloto CDMX.
 Diseñado para escalar a PostgreSQL en producción.
@@ -11,7 +11,7 @@ Entidades propias levantadas en campo por equipo XOLUM:
   - Observaciones de calle (gentrificación, estado)
   - Zonas auditadas (polígono con fecha de revisión)
 
-Esta base de datos es el activo diferenciador de URBANIA:
+Esta base de datos es el activo diferenciador de SUSVI:
 datos verificados en campo, no dependientes de fuentes gubernamentales.
 """
 import sqlite3
@@ -19,9 +19,9 @@ import os
 import logging
 from datetime import datetime, timezone
 
-logger = logging.getLogger("urbania.db")
+logger = logging.getLogger("susvi.db")
 
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "urbania_campo.db")
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "susvi_campo.db")
 
 
 def get_connection() -> sqlite3.Connection:
@@ -191,7 +191,7 @@ def init_db():
 
     conn.commit()
     conn.close()
-    logger.info("Base de datos URBANIA inicializada: %s", DB_PATH)
+    logger.info("Base de datos SUSVI inicializada: %s", DB_PATH)
 
 
 def seed_demo_data():

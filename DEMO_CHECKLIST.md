@@ -1,4 +1,4 @@
-# Checklist de Verificación PRE-DEMO de URBANIA ✔️
+# Checklist de Verificación PRE-DEMO de SUSVI ✔️
 
 Utiliza esta lista de verificación táctica antes de presentar el MVP al jurado del Hackathon. Verifica que todos los casos base offline y online operan al 100%.
 

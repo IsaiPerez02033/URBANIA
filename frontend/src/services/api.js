@@ -39,7 +39,7 @@ export const getReportePDF = async (zona_id, cliente) => {
   const disposition = response.headers['content-disposition']
   const filename = disposition
     ? disposition.split('filename=')[1]?.replace(/"/g, '')
-    : `URBANIA_${cliente}_reporte.pdf`
+    : `SUSVI_${cliente}_reporte.pdf`
   link.download = filename
   // Agregamos el enlace al DOM, simulamos el clic para descargar y luego lo limpiamos
   document.body.appendChild(link)

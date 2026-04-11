@@ -1,7 +1,7 @@
 @startuml
 !theme cerulean
 
-title URBANIA - Diagrama de Clases (Analytics Engine)
+title SUSVI - Diagrama de Clases (Analytics Engine)
 
 package "Core Entities" {
     class NormalizedFeature {
@@ -65,7 +65,7 @@ package "Utilities & Data" {
         +flag_production_sources() -> bool
     }
     
-    class URBANIAReportGenerator {
+    class SUSVIReportGenerator {
         -colors: dict
         -styles: StyleSheet
         +__init__()
@@ -77,7 +77,7 @@ package "Utilities & Data" {
 DemandAgent "1" -- "many" NormalizedFeature : "Process"
 RiskAgent "1" -- "many" NormalizedFeature : "Process"
 BusinessAgent "1" -- "many" Scenario : "Creates"
-BusinessAgent ..> URBANIAReportGenerator : "Suministra Contexto"
+BusinessAgent ..> SUSVIReportGenerator : "Suministra Contexto"
 
 DataIngester ..> NormalizedFeature : "Instantiates"
 

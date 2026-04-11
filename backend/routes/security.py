@@ -1,5 +1,5 @@
 """
-URBANIA SEGURIDAD — Endpoints REST
+SUSVI SEGURIDAD — Endpoints REST
 ====================================
 GET  /api/v1/seguridad/zonas                     → listado rápido (sin Watsonx)
 GET  /api/v1/seguridad/zonas/{id}                → zona completa CON Granite
@@ -33,7 +33,7 @@ from db.security_scorer import (
 )
 
 # Creamos el logger específico para el módulo de rutas de seguridad
-logger = logging.getLogger("urbania.routes.security")
+logger = logging.getLogger("susvi.routes.security")
 # Creamos el router con el prefijo y la etiqueta de la sección en la documentación
 router = APIRouter(prefix="/api/v1/seguridad", tags=["Seguridad Urbana"])
 
@@ -337,16 +337,16 @@ def reporte_pdf(zona_id: str, cliente: str):
     }
 
     # Importamos el generador de PDF de forma diferida para evitar la carga al arrancar el módulo
-    from utils.pdf_generator import URBANIAReportGenerator
-    generator = URBANIAReportGenerator()
+    from utils.pdf_generator import SUSVIReportGenerator
+    generator = SUSVIReportGenerator()
 
     # Creamos el directorio temporal donde guardamos los PDFs antes de servirlos
-    tmp_dir = os.path.join(tempfile.gettempdir(), "urbania_pdfs")
+    tmp_dir = os.path.join(tempfile.gettempdir(), "susvi_pdfs")
     os.makedirs(tmp_dir, exist_ok=True)
 
     # Sanitizamos el nombre de la zona para usarlo como parte del nombre del archivo PDF
     safe_zona = zona_data["nombre"].replace(" ", "_").replace("/", "-")[:30]
-    filename = f"URBANIA_{cliente}_{safe_zona}.pdf"
+    filename = f"SUSVI_{cliente}_{safe_zona}.pdf"
     output_path = os.path.join(tmp_dir, filename)
 
     try:
